@@ -1,0 +1,121 @@
+﻿<Window x:Name="VatMain" x:Class="KadzApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KadzApp"
+        mc:Ignorable="d"
+        Title="Kalkulator Kadzi" Height="621" Width="1257" Icon="resources/icon.png" MinHeight="450" MinWidth="800">
+    <Grid>
+        <DockPanel ClipToBounds="True">
+            <StackPanel MinHeight="600" MinWidth="800">
+                <TabControl Height="583" Width="auto" Background="White" BorderBrush="White">
+                    <TabItem Header="Obliczanie objętości">
+                        <Grid>
+                            <Grid x:Name="tbSteel" Margin="0,-14,0,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75*"/>
+                                    <ColumnDefinition Width="80*"/>
+                                    <ColumnDefinition Width="627*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="lbSteelWeight" Content="Waga stali" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,26,0,0"/>
+                                <Label x:Name="lbSteelDensity" Content="Gęstość stali" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Grid.ColumnSpan="2"/>
+                                <Label x:Name="lbSteelSize" Content="Objętość stali" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,88,0,0" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txbSteelWeight" HorizontalAlignment="Left" Height="23" Margin="32,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" KeyUp="TxbSteelWeight_KeyUp" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txbSteelDensity" HorizontalAlignment="Left" Height="23" Margin="32,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" KeyUp="TxbSteelDensity_KeyUp" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txbSteelSize" HorizontalAlignment="Left" Height="23" Margin="32,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsEnabled="False" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <ComboBox x:Name="cbSteelWeight" HorizontalAlignment="Left" Margin="273,30,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" SelectionChanged="CbWeight_SelectionChanged" Grid.Column="2"/>
+                                <ComboBox x:Name="cbSteelDensity" HorizontalAlignment="Left" Margin="273,61,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbDensity_SelectionChanged" Grid.Column="2"/>
+                                <ComboBox x:Name="cbSteelSize" HorizontalAlignment="Left" Margin="273,92,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbSize_SelectionChanged" Grid.Column="2"/>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="tbVat" Header="Obliczanie kadzi" Background="#FFEAEAEA">
+                        <Grid Margin="10,0,0,-2" ClipToBounds="True" HorizontalAlignment="Left" Width="1228">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="17*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="77*"/>
+                                <ColumnDefinition Width="705*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="lbVatD1" Content="Górna średnica" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,8,0,0" Grid.Row="1"/>
+                            <Label x:Name="lbVatD2" Content="Dolna średnica" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,39,0,0" Grid.Row="1"/>
+                            <Label x:Name="lbVatH" Content="Wysokość" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,70,0,0" Grid.Row="1"/>
+                            <Grid Margin="426,-1,305,0" Grid.Column="1" Grid.RowSpan="2" Height="290" VerticalAlignment="Top" >
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="resources/vat.jpg"/>
+                                </Grid.Background>
+                                <Label x:Name="lbVatCalcHeight" Content="0 m" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="28" Margin="-57,89,240,0" FontSize="16">
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label x:Name="lbVatCalcD1" Content="0 m" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,22,0,0" FontSize="16" Width="251"/>
+                                <Label x:Name="lbVatCalcD2" Content="0 m" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,239,0,0" FontSize="16" RenderTransformOrigin="0.548,0.452" Width="231"/>
+
+                            </Grid>
+                            <TextBox x:Name="txbVatD1" Height="23" Margin="93,13,835,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="TxbVatD1_KeyUp" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="txbVatD2" HorizontalAlignment="Left" Height="23" Margin="93,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" KeyUp="TxbVatD2_KeyUp" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="txbVatH" Height="23" Margin="93,74,835,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyUp="TxbVatH_KeyUp" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            <ComboBox x:Name="cbUpDiameter" HorizontalAlignment="Left" Margin="280,13,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" Grid.Column="1" SelectionChanged="CbUpDiameter_SelectionChanged" Grid.Row="1"/>
+                            <ComboBox x:Name="cbLowDiameter" HorizontalAlignment="Left" Margin="280,43,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" Grid.Column="1" SelectionChanged="CbLowDiameter_SelectionChanged" Grid.Row="1"/>
+                            <ComboBox x:Name="cbHeight" HorizontalAlignment="Left" Margin="280,74,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" Grid.Column="1" SelectionChanged="CbHeight_SelectionChanged" Grid.Row="1"/>
+                            <CheckBox x:Name="chVatRSize" Content="Użyj wartości z kalkulatora objętości" HorizontalAlignment="Left" Margin="802,8,0,503" Grid.Row="1" Grid.Column="1" Unchecked="ChVatRScale_Checked" Checked="ChVatRScale_Checked"/>
+                            <Label x:Name="lbVatSize" Content="Objętość" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,112,0,0" Grid.Row="1"/>
+                            <TextBox x:Name="txbVatSize" HorizontalAlignment="Left" Height="23" Margin="93,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsEnabled="False" Grid.Row="1" BorderBrush="White" Grid.ColumnSpan="2"/>
+                            <ComboBox x:Name="cbVatSize" HorizontalAlignment="Left" Margin="280,116,0,0" VerticalAlignment="Top" Width="120" Background="{x:Null}" Grid.Column="1" SelectionChanged="CbVatSize_SelectionChanged" Grid.Row="1"/>
+
+                            <Button x:Name="btnSaveVat" Content="Zapisz" Margin="0,251,22,0" Click="BtnSaveVat_Click" Grid.Row="1" Height="21" VerticalAlignment="Top"/>
+                            <Button x:Name="btnReadVat" Content="Wczytaj" Margin="0,293,22,0" Click="BtnReadVat_Click" Grid.Row="1" Height="21" VerticalAlignment="Top"/>
+                            <Grid x:Name="gdScale" Margin="29,249,681,0" Grid.Column="1" Background="#FFE6E6E6" Grid.Row="1" Height="277" VerticalAlignment="Top">
+                                <Label x:Name="lbVatSmallD1" Content="Górna średnica" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,41,0,0"/>
+                                <Label x:Name="lbVatSmallD2" Content="Dolna średnica" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,72,0,0"/>
+                                <Label x:Name="lbVatSmallH" Content="Wysokość" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,103,0,0"/>
+                                <Label x:Name="lbVatSmallD1Val" Content="" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="121,41,0,0" Width="187"/>
+                                <Label x:Name="lbVatSmallD2Val" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="121,72,0,0" Width="187"/>
+                                <Label x:Name="lbVatSmallHVal" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="121,103,0,0" Width="187"/>
+                                <Label x:Name="lbVatSmall" Content="Wymiary w skali" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                                <Label x:Name="lbVatSmallSize" Content="Objętość" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,134,0,0"/>
+                                <Label x:Name="lbVatSmallSizeVal" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="121,134,0,0" Width="187"/>
+                            </Grid>
+                            <CheckBox x:Name="chVatScale" Content="Kadź w skali" HorizontalAlignment="Left" Margin="11,180,0,0" VerticalAlignment="Top" Grid.Row="1" Width="88" Checked="ChVatScale_Checked" Unchecked="ChVatScale_Checked"/>
+                            <TextBox x:Name="txbVatScale_1" Margin="116,173,1069,330" TextWrapping="Wrap" Grid.Row="1" KeyUp="TxbVatScale_KeyUp" Width="43" Grid.ColumnSpan="2"/>
+                            <Grid x:Name="gdVatScale" Margin="426,249,305,-13" Grid.Column="1" Height="290" VerticalAlignment="Top" Grid.Row="1" >
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="resources/vatSmall.jpg"/>
+                                </Grid.Background>
+                                <Label x:Name="lbVatCalcHeightSmall" Content="0 m" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="28" Margin="-55,91,242,0" FontSize="16">
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label x:Name="lbVatCalcD1Small" Content="0 m" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,19,0,0" FontSize="16" Width="265"/>
+                                <Label x:Name="lbVatCalcD2Small" Content="0 m" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,249,0,0" FontSize="16" RenderTransformOrigin="0.548,0.452" Width="238"/>
+
+                            </Grid>
+                            <TextBox x:Name="txbVatScale_2" Height="23" Margin="0,173,1003,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" KeyUp="TxbVatScale_KeyUp" HorizontalAlignment="Right" Width="43" Grid.Column="1"/>
+                            <Label x:Name="lbVatScale" Content=":" Margin="0,168,1046,0" Grid.Row="1" RenderTransformOrigin="4.231,1.269" Height="33" VerticalAlignment="Top" HorizontalAlignment="Right" Width="18" FontSize="18" FontWeight="Bold" Grid.Column="1"/>
+                            <TextBox x:Name="txbVatRScale_1" Height="23" Margin="845,70,216,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="43" KeyUp="TxbVatRScale_KeyUp"/>
+                            <TextBox x:Name="txbVatRScale_2" Height="23" Margin="0,70,146,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="43" KeyUp="TxbVatRScale_KeyUp"/>
+                            <Label x:Name="lbVatRScale" Content=":" VerticalAlignment="Top" Margin="0,64,194,0" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="4.231,1.269" Height="32" HorizontalAlignment="Right" Width="17" FontSize="18" FontWeight="Bold"/>
+                            <Label x:Name="lbVatRscaleInfo" Content="Skala Górna średnica : Dolna średnica" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="807,39,0,0" Grid.Row="1" Grid.Column="1"/>
+
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
