@@ -114,6 +114,24 @@
 
                         </Grid>
                     </TabItem>
+                    <TabItem Header="parametry agonowania">
+                        <Grid>
+                            <Label x:Name="lbArgonC" Content="C" HorizontalAlignment="Left" Margin="32,34,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbArgonCPrim" Content="C'" HorizontalAlignment="Left" Margin="32,70,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txbAronC" HorizontalAlignment="Left" Height="23" Margin="83,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                            <Label x:Name="lbArgonFlowIndu" Content="Przepływ gazu w przemyśle [l/min]" HorizontalAlignment="Left" Margin="32,133,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txbAronCPrim" HorizontalAlignment="Left" Height="22" Margin="83,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                            <Label x:Name="lbArgonFlowScale" Content="Skala przepływu gazu SQ" HorizontalAlignment="Left" Margin="32,164,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbArgonFlowModel" Content="Przepływ gazu Q' w modelu [l/min]" HorizontalAlignment="Left" Margin="32,195,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="txbArgonFlowIndu" HorizontalAlignment="Left" Height="23" Margin="257,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="txbArgonFlowIndu_KeyUp"/>
+                            <TextBox x:Name="txbArgonFlowScale" HorizontalAlignment="Left" Height="23" Margin="257,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                            <TextBox x:Name="txbArgonFlowModel" HorizontalAlignment="Left" Height="23" Margin="257,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+
+
+
+                        </Grid>
+                    </TabItem>
+
                 </TabControl>
             </StackPanel>
         </DockPanel>

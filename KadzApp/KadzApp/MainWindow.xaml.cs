@@ -1,4 +1,4 @@
-﻿using KadzApp.steel;
+﻿using KadzApp.Models;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -13,8 +13,9 @@ namespace KadzApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Steel steel;
-        private Vat vat;
+        private Steel steel_;
+        private Vat vat_;
+        private Argon argon_;
 
         public MainWindow()
         {
@@ -41,7 +42,7 @@ namespace KadzApp
 
         private void InitObjects()
         {
-            steel = new Steel()
+            steel_ = new Steel()
             {
                 WeightUnit = WEIGHT_UNITS.KG,
                 DensityUnit = DENSITY_UNITS.KGM3,
@@ -50,7 +51,8 @@ namespace KadzApp
                 Size = 0,
                 Weight = 0
             };
-            vat = new Vat();
+            vat_ = new Vat();
+            argon_ = new Argon();
         }
 
         private void InitComboBoxes()
@@ -86,24 +88,29 @@ namespace KadzApp
             cbVatSize.Items.Add(new ComboBoxItem() { Content = "m^3", Tag = "M3" });
             cbVatSize.SelectedIndex = 1;
             //TextBoxes
-            txbVatRScale_1.Text = $"{vat.RscalerLeft}";
-            txbVatRScale_2.Text = $"{vat.RscalerRight}";
-            txbVatScale_1.Text = $"{vat.VatscaleLeft}";
-            txbVatScale_2.Text = $"{vat.VatscaleRight}";
+            txbVatRScale_1.Text = $"{vat_.RscalerLeft}";
+            txbVatRScale_2.Text = $"{vat_.RscalerRight}";
+            txbVatScale_1.Text = $"{vat_.VatscaleLeft}";
+            txbVatScale_2.Text = $"{vat_.VatscaleRight}";
         }
 
-        //TAB Size
+        //********************************************************************************
+        //################################################################################ 
+        //############################# TAB STEEL ######################################## 
+        //################################################################################ 
+        //********************************************************************************
         private void RecalcSteel()
         {
-            steel.Calc();
-            txbSteelSize.Text = steel.GetSize();
+            steel_.Calc();
+            txbSteelSize.Text = steel_.GetSize();
+            argon_.SetSteelDensity(steel_.GetDensity());
         }
 
         private void TxbSteelWeight_KeyUp(object sender, KeyEventArgs e)
         {
             if (double.TryParse(txbSteelWeight.Text, out double weight))
             {
-                steel.Weight = weight;
+                steel_.Weight = weight;
                 RecalcSteel();
             }
         }
@@ -112,7 +119,7 @@ namespace KadzApp
         {
             if (double.TryParse(txbSteelDensity.Text, out double density))
             {
-                steel.Density = density;
+                steel_.Density = density;
                 RecalcSteel();
             }
         }
@@ -121,7 +128,7 @@ namespace KadzApp
         {
             if (cbSteelWeight.SelectedIndex >= 0)
             {
-                steel.WeightUnit = (WEIGHT_UNITS)Enum.Parse(typeof(WEIGHT_UNITS), ((ComboBoxItem)cbSteelWeight.SelectedItem).Tag.ToString());
+                steel_.WeightUnit = (WEIGHT_UNITS)Enum.Parse(typeof(WEIGHT_UNITS), ((ComboBoxItem)cbSteelWeight.SelectedItem).Tag.ToString());
                 RecalcSteel();
             }
         }
@@ -130,7 +137,7 @@ namespace KadzApp
         {
             if (cbSteelDensity.SelectedIndex >= 0)
             {
-                steel.DensityUnit = (DENSITY_UNITS)Enum.Parse(typeof(DENSITY_UNITS), ((ComboBoxItem)cbSteelDensity.SelectedItem).Tag.ToString());
+                steel_.DensityUnit = (DENSITY_UNITS)Enum.Parse(typeof(DENSITY_UNITS), ((ComboBoxItem)cbSteelDensity.SelectedItem).Tag.ToString());
                 RecalcSteel();
             }
         }
@@ -139,36 +146,42 @@ namespace KadzApp
         {
             if (cbSteelSize.SelectedIndex >= 0)
             {
-                steel.SizeUnit = (SIZE_UNITS)Enum.Parse(typeof(SIZE_UNITS), ((ComboBoxItem)cbSteelSize.SelectedItem).Tag.ToString());
+                steel_.SizeUnit = (SIZE_UNITS)Enum.Parse(typeof(SIZE_UNITS), ((ComboBoxItem)cbSteelSize.SelectedItem).Tag.ToString());
                 RecalcSteel();
             }
         }
 
-        //TAB Vat
+        //********************************************************************************
+        //################################################################################ 
+        //############################# TAB VAT ########################################## 
+        //################################################################################ 
+        //********************************************************************************
         private void RecalcVat()
         {
-            vat.Calc();
+            vat_.Calc();
             ChangeD1Lb();
             ChangeD2Lb();
             ChangeHLb();
-            if (vat.Compute)
+            if (vat_.Compute)
             {
-                txbVatD1.Text = $"{vat.UpperDiamater}";
-                txbVatD2.Text = $"{vat.LowerDiamater}";
-                txbVatH.Text = $"{vat.Height}";
+                txbVatD1.Text = $"{vat_.UpperDiamater}";
+                txbVatD2.Text = $"{vat_.LowerDiamater}";
+                txbVatH.Text = $"{vat_.Height}";
             }
             else
             {
-                txbVatSize.Text = $"{vat.SteelSize}";
+                txbVatSize.Text = $"{vat_.SteelSize}";
             }
             ChVatScale_Checked(null, null);
+            argon_.SetScale(vat_.GetScale());
+            RecalcArgon();
         }
 
         private void TxbVatD1_KeyUp(object sender, KeyEventArgs e)
         {
             if (double.TryParse(txbVatD1.Text, out double upperDiameter))
             {
-                vat.UpperDiamater = upperDiameter;
+                vat_.UpperDiamater = upperDiameter;
                 RecalcVat();
             }
         }
@@ -177,7 +190,7 @@ namespace KadzApp
         {
             if (double.TryParse(txbVatH.Text, out double height))
             {
-                vat.Height = height;
+                vat_.Height = height;
                 RecalcVat();
             }
         }
@@ -186,7 +199,7 @@ namespace KadzApp
         {
             if (double.TryParse(txbVatD2.Text, out double LowerDiameter))
             {
-                vat.LowerDiamater = LowerDiameter;
+                vat_.LowerDiamater = LowerDiameter;
                 RecalcVat();
             }
         }
@@ -195,7 +208,7 @@ namespace KadzApp
         {
             if (cbHeight.SelectedIndex >= 0)
             {
-                vat.HeightUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbHeight.SelectedItem).Tag.ToString());
+                vat_.HeightUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbHeight.SelectedItem).Tag.ToString());
                 RecalcVat();
             }
         }
@@ -204,7 +217,7 @@ namespace KadzApp
         {
             if (cbUpDiameter.SelectedIndex >= 0)
             {
-                vat.UpperDiamaterUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbUpDiameter.SelectedItem).Tag.ToString());
+                vat_.UpperDiamaterUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbUpDiameter.SelectedItem).Tag.ToString());
                 RecalcVat();
             }
         }
@@ -213,7 +226,7 @@ namespace KadzApp
         {
             if (cbLowDiameter.SelectedIndex >= 0)
             {
-                vat.LowerDiamaterUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbLowDiameter.SelectedItem).Tag.ToString());
+                vat_.LowerDiamaterUnit = (DIMENSIONS_UNITS)Enum.Parse(typeof(DIMENSIONS_UNITS), ((ComboBoxItem)cbLowDiameter.SelectedItem).Tag.ToString());
                 RecalcVat();
             }
         }
@@ -222,7 +235,7 @@ namespace KadzApp
         {
             if (cbVatSize.SelectedIndex >= 0)
             {
-                vat.SteelSizeUnit = (SIZE_UNITS)Enum.Parse(typeof(SIZE_UNITS), ((ComboBoxItem)cbVatSize.SelectedItem).Tag.ToString());
+                vat_.SteelSizeUnit = (SIZE_UNITS)Enum.Parse(typeof(SIZE_UNITS), ((ComboBoxItem)cbVatSize.SelectedItem).Tag.ToString());
                 RecalcVat();
             }
         }
@@ -245,7 +258,7 @@ namespace KadzApp
             {
                 // Save document
                 string fileName = dlg.FileName;
-                File.WriteAllText(fileName, JsonConvert.SerializeObject(vat));
+                File.WriteAllText(fileName, JsonConvert.SerializeObject(vat_));
             }
         }
 
@@ -265,26 +278,26 @@ namespace KadzApp
                 try
                 {
                     string fileName = dlg.FileName;
-                    vat = JsonConvert.DeserializeObject<Vat>(File.ReadAllText(fileName));
+                    vat_ = JsonConvert.DeserializeObject<Vat>(File.ReadAllText(fileName));
                     ChangeD1Lb();
                     ChangeD2Lb();
                     ChangeHLb();
-                    txbVatD1.Text = $"{vat.UpperDiamater}";
-                    txbVatD2.Text = $"{vat.LowerDiamater}";
-                    txbVatH.Text = $"{vat.Height}";
+                    txbVatD1.Text = $"{vat_.UpperDiamater}";
+                    txbVatD2.Text = $"{vat_.LowerDiamater}";
+                    txbVatH.Text = $"{vat_.Height}";
                     RecalcVat();
                     chVatScale.IsChecked = false;
-                    if (vat.UseScale)
+                    if (vat_.UseScale)
                     {
-                        txbVatRScale_1.Text = $"{vat.RscalerLeft}";
-                        txbVatRScale_2.Text = $"{vat.RscalerRight}";
+                        txbVatRScale_1.Text = $"{vat_.RscalerLeft}";
+                        txbVatRScale_2.Text = $"{vat_.RscalerRight}";
                         chVatScale.IsChecked = true;
                     }
                     chVatRSize.IsChecked = false;
-                    if (vat.Compute)
+                    if (vat_.Compute)
                     {
-                        txbVatScale_1.Text = $"{vat.VatscaleLeft}";
-                        txbVatScale_2.Text = $"{vat.VatscaleRight}";
+                        txbVatScale_1.Text = $"{vat_.VatscaleLeft}";
+                        txbVatScale_2.Text = $"{vat_.VatscaleRight}";
                         chVatRSize.IsChecked = true;
                     }
                 }
@@ -299,8 +312,8 @@ namespace KadzApp
 
         private void ChVatScale_Checked(object sender, RoutedEventArgs e)
         {
-            vat.UseScale = (bool)chVatScale.IsChecked;
-            if (vat.UseScale)
+            vat_.UseScale = (bool)chVatScale.IsChecked;
+            if (vat_.UseScale)
             {
                 txbVatScale_1.Visibility = Visibility.Visible;
                 txbVatScale_2.Visibility = Visibility.Visible;
@@ -323,7 +336,7 @@ namespace KadzApp
         {
             try
             {
-                lbVatCalcD1.Content = $"{vat.UpperDiamater} {((ComboBoxItem)cbUpDiameter.SelectedItem).Content}";
+                lbVatCalcD1.Content = $"{vat_.UpperDiamater} {((ComboBoxItem)cbUpDiameter.SelectedItem).Content}";
             }
             catch (Exception e)
             {
@@ -335,7 +348,7 @@ namespace KadzApp
         {
             try
             {
-                lbVatCalcD2.Content = $"{vat.LowerDiamater} {((ComboBoxItem)cbLowDiameter.SelectedItem).Content}";
+                lbVatCalcD2.Content = $"{vat_.LowerDiamater} {((ComboBoxItem)cbLowDiameter.SelectedItem).Content}";
             }
             catch (Exception e)
             {
@@ -347,7 +360,7 @@ namespace KadzApp
         {
             try
             {
-                lbVatCalcHeight.Content = $"{vat.Height} {((ComboBoxItem)cbHeight.SelectedItem).Content}";
+                lbVatCalcHeight.Content = $"{vat_.Height} {((ComboBoxItem)cbHeight.SelectedItem).Content}";
             }
             catch (Exception e)
             {
@@ -357,11 +370,11 @@ namespace KadzApp
 
         private void ChVatRScale_Checked(object sender, RoutedEventArgs e)
         {
-            vat.Compute = (bool)chVatRSize.IsChecked;
-            txbVatD2.IsEnabled = !vat.Compute;
-            txbVatD1.IsEnabled = !vat.Compute;
-            txbVatH.IsEnabled = !vat.Compute;
-            if (vat.Compute)
+            vat_.Compute = (bool)chVatRSize.IsChecked;
+            txbVatD2.IsEnabled = !vat_.Compute;
+            txbVatD1.IsEnabled = !vat_.Compute;
+            txbVatH.IsEnabled = !vat_.Compute;
+            if (vat_.Compute)
             {
                 txbVatRScale_1.Visibility = Visibility.Visible;
                 txbVatRScale_2.Visibility = Visibility.Visible;
@@ -371,11 +384,11 @@ namespace KadzApp
                 {
                     if (left != right)
                     {
-                        vat.RscalerLeft = left;
-                        vat.RscalerRight = right;
-                        txbVatSize.Text = $"{steel.Size}";
-                        vat.SteelSize = steel.Size;
-                        vat.SteelSizeUnit = SIZE_UNITS.M3;
+                        vat_.RscalerLeft = left;
+                        vat_.RscalerRight = right;
+                        txbVatSize.Text = $"{steel_.Size}";
+                        vat_.SteelSize = steel_.Size;
+                        vat_.SteelSizeUnit = SIZE_UNITS.M3;
                         cbVatSize.SelectedIndex = 1;
                         RecalcVat();
                     }
@@ -396,8 +409,8 @@ namespace KadzApp
         {
             if (int.TryParse(txbVatRScale_2.Text, out int right) && int.TryParse(txbVatRScale_1.Text, out int left))
             {
-                vat.RscalerRight = right;
-                vat.RscalerLeft = left;
+                vat_.RscalerRight = right;
+                vat_.RscalerLeft = left;
                 RecalcVat();
             }
         }
@@ -407,21 +420,44 @@ namespace KadzApp
         {
             if (int.TryParse(txbVatScale_1.Text, out int left) && int.TryParse(txbVatScale_2.Text, out int right))
             {
-                vat.VatscaleRight = right;
-                vat.VatscaleLeft = left;
+                vat_.VatscaleRight = right;
+                vat_.VatscaleLeft = left;
                 RecalcSmallVat();
             }
         }
 
         private void RecalcSmallVat()
         {
-            lbVatSmallD1Val.Content = $"{vat.UpperDiamaterInScale()} m";
-            lbVatCalcD1Small.Content = $"{vat.UpperDiamaterInScale()} m";
-            lbVatSmallD2Val.Content = $"{vat.LowerDiamaterInScale()} m";
-            lbVatCalcD2Small.Content = $"{vat.LowerDiamaterInScale()} m";
-            lbVatSmallHVal.Content = $"{vat.HeightInScale()} m";
-            lbVatCalcHeightSmall.Content = $"{vat.HeightInScale()} m";
-            lbVatSmallSizeVal.Content = $"{vat.SteelSizeInScale()} m^3";
+            lbVatSmallD1Val.Content = $"{vat_.UpperDiamaterInScale()} m";
+            lbVatCalcD1Small.Content = $"{vat_.UpperDiamaterInScale()} m";
+            lbVatSmallD2Val.Content = $"{vat_.LowerDiamaterInScale()} m";
+            lbVatCalcD2Small.Content = $"{vat_.LowerDiamaterInScale()} m";
+            lbVatSmallHVal.Content = $"{vat_.HeightInScale()} m";
+            lbVatCalcHeightSmall.Content = $"{vat_.HeightInScale()} m";
+            lbVatSmallSizeVal.Content = $"{vat_.SteelSizeInScale()} m^3";
+        }
+
+        //********************************************************************************
+        //################################################################################ 
+        //############################# TAB ARGON ######################################## 
+        //################################################################################ 
+        //********************************************************************************
+        private void RecalcArgon()
+        {
+            argon_.Calc();
+            txbAronC.Text = argon_.CFactorIndustry().ToString();
+            txbAronCPrim.Text = argon_.CFactorModel().ToString();
+            txbArgonFlowModel.Text = argon_.GetFlowModel().ToString();
+            txbArgonFlowScale.Text = argon_.GetFlowScale().ToString();           
+        }
+
+        private void txbArgonFlowIndu_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(double.TryParse(txbArgonFlowIndu.Text,out double value))
+            {
+                argon_.SetInduFlow(value);
+                RecalcArgon();
+            }
         }
     }
 }

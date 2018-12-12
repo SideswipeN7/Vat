@@ -61,9 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="steel\Argon.cs" />
-    <Compile Include="steel\Steel.cs" />
-    <Compile Include="steel\Vat.cs" />
+    <Compile Include="Models\Argon.cs" />
+    <Compile Include="Models\Steel.cs" />
+    <Compile Include="Models\Vat.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,13 +105,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\vat.jpg" />
+    <Resource Include="Resources\vat.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\icon.png" />
+    <Resource Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\vatSmall.jpg" />
+    <Resource Include="Resources\vatSmall.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
