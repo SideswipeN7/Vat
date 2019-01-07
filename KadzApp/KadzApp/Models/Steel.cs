@@ -19,15 +19,16 @@ namespace KadzApp.Models
         //Public Attributes
         public double Weight { get { return weight; } set { weight = value; } }
         public WEIGHT_UNITS WeightUnit { get { return weightUnit; } set { weightUnit = value; } }
+		public int SelectedIndexWeightUnit { get; set; }
         public double Density { get { return density; } set { density = value; } }
         public DENSITY_UNITS DensityUnit { get { return densityUnit; } set { densityUnit = value; } }
-
-        public double Size { get { return size; } set { size = value * (int)sizeUnit / (int)SIZE_UNITS.M3; } }
+		public int SelectedIndexDensityUnit { get; set; }
+		public double Size { get { return size; } set { size = value * (int)sizeUnit / (int)SIZE_UNITS.M3; } }
         public SIZE_UNITS SizeUnit { get { return sizeUnit; } set { sizeUnit = value; } }
+		public int SelectedIndexSizeUnit { get; set; }
+		//Methods
 
-        //Methods
-
-        public void Calc()
+		public void Calc()
         {
             if (density != 0 && weight != 0)
             {

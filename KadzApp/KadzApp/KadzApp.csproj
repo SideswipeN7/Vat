@@ -61,7 +61,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FactorAlgorithms\DencityAlgorithm.cs" />
+    <Compile Include="FactorAlgorithms\MoleWeightAlgorithm.cs" />
+    <Compile Include="Models\Algorithms.cs" />
     <Compile Include="Models\Argon.cs" />
+    <Compile Include="Models\GlobalVariables.cs" />
+    <Compile Include="Models\SaveDto.cs" />
     <Compile Include="Models\Steel.cs" />
     <Compile Include="Models\Vat.cs" />
     <Page Include="MainWindow.xaml">
