@@ -4,7 +4,7 @@
 namespace KadzApp.Models
 {
     public enum DIMENSIONS_UNITS : int { DCM = 1, M = 10 }
-    class Vat
+    public class Vat
     {
         //Private
         //Variables

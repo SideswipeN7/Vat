@@ -1,0 +1,14 @@
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\KadzAppTest.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\KadzAppTest.pdb
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\obj\Debug\KadzAppTest.csprojAssemblyReference.cache
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\obj\Debug\KadzAppTest.csproj.CoreCompileInputs.cache
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\obj\Debug\KadzAppTest.csproj.CopyComplete
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\obj\Debug\KadzAppTest.dll
+C:\Studia\Pieprzyca\WorkSpace\Vat\KadzApp\KadzAppTest\obj\Debug\KadzAppTest.pdb

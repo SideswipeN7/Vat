@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KadzApp", "KadzApp\KadzApp.csproj", "{B201D397-1257-4B24-BF3D-D6E09CBCE72C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KadzAppTest", "KadzAppTest\KadzAppTest.csproj", "{0F51F0A1-9AF6-4871-B77C-E8D24497FA31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B201D397-1257-4B24-BF3D-D6E09CBCE72C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B201D397-1257-4B24-BF3D-D6E09CBCE72C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B201D397-1257-4B24-BF3D-D6E09CBCE72C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F51F0A1-9AF6-4871-B77C-E8D24497FA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F51F0A1-9AF6-4871-B77C-E8D24497FA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F51F0A1-9AF6-4871-B77C-E8D24497FA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F51F0A1-9AF6-4871-B77C-E8D24497FA31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
